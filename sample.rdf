@@ -1,0 +1,892 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61/"
+     xml:base="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:untitled-ontology-61="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#IsEquippedWith -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#IsEquippedWith">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#IsIntendedFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#IsIntendedFor"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#IsPartOff -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#IsPartOff"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#concerns -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#concerns"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#concernsCell -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#concernsCell"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#isDiscussed -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#isDiscussed"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#isProduct -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#isProduct"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#isRelatedTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#isRelatedTo"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#occuredFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#occuredFor">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Occurrance"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#BasicName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#BasicName">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#CatalogName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#CatalogName">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Name"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#MeetingsDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#MeetingsDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Meeting"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#MeetingsName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#MeetingsName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Meeting"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Name">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Object -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Object">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Name"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#OtherName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#OtherName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Subject -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Subject">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Name"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#TextOfNote -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#TextOfNote">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Tonnage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Tonnage">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Verb -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Verb">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Name"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Acceptance -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Acceptance">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Others"/>
+        <rdfs:isDefinedBy>odbiór</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>odebrać</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Accessory -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Accessory"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Assembling -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Assembling">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Operation"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Weld"/>
+        <rdfs:isDefinedBy>montować</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Breakdown -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Breakdown">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Failure"/>
+        <rdfs:isDefinedBy>awaria</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Case -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Case"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cavity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cavity">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Mold"/>
+        <rdfs:isDefinedBy>gniazdo</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Concern -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Concern"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Defect -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Defect">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Reduced_efficiency"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device">
+        <rdfs:isDefinedBy>urządzenie</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#DevicesElements -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#DevicesElements">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Disqualifying_defect -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Disqualifying_defect">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Failure"/>
+        <rdfs:isDefinedBy>dziury wyszły</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#EPAC_manipulator -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#EPAC_manipulator">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Failure -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Failure">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Occurrance"/>
+        <rdfs:isDefinedBy>awaria</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Gutter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Gutter">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Machine_Sprayer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Machine_Sprayer">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Pressure_machine"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Meeting -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Meeting"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Mold -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Mold">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Accessory"/>
+        <rdfs:isDefinedBy>forma</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Molds_breakdown -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Molds_breakdown">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Failure"/>
+        <rdfs:isDefinedBy>brak rdzenie</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Occurrance -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Occurrance"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Operation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Operation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Occurrance"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Others -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Others">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Occurrance"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Porosity -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Porosity">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Reduced_quality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Pouring_spoon -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Pouring_spoon">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+        <rdfs:isDefinedBy>piec</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater_Sprayer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater_Sprayer">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater"/>
+        <rdfs:isDefinedBy>spryskiwacz</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Pressure_machine -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Pressure_machine">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+        <rdfs:isDefinedBy>maszyna</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Reduced_efficiency -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Reduced_efficiency">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Occurrance"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Reduced_quality -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Reduced_quality">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Occurrance"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Robot_ABB -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Robot_ABB">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Sprayer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Sprayer">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Sprayer_Hose -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Sprayer_Hose">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Machine_Sprayer"/>
+        <rdfs:isDefinedBy>wąż od sprej</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Table -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Table">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Pressure_machine"/>
+        <rdfs:isDefinedBy>stół</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Thermoregulation_device -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Thermoregulation_device">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Weld -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Weld">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Operation"/>
+        <rdfs:isDefinedBy>spawać</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#conveyor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#conveyor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Mold_defect -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Mold_defect">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Mold"/>
+        <untitled-ontology-61:Name>defekt formy</untitled-ontology-61:Name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater_Breakdown -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater_Breakdown">
+        <untitled-ontology-61:isRelatedTo rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater_Sprayer_Brakdown"/>
+        <untitled-ontology-61:Name>awaria pieca</untitled-ontology-61:Name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater_Sprayer_Brakdown -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater_Sprayer_Brakdown">
+        <untitled-ontology-61:Name>awaria spryskiwacza pieca</untitled-ontology-61:Name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater_Sprayer_Breakdown -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater_Sprayer_Breakdown"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Tables_weld -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Tables_weld">
+        <untitled-ontology-61:Name>pospawanie stołu</untitled-ontology-61:Name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Thermoregulation_device_names -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Thermoregulation_device_names">
+        <untitled-ontology-61:Name>hajcung</untitled-ontology-61:Name>
+        <untitled-ontology-61:Name>urządzenie termoregulujące</untitled-ontology-61:Name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#dwudziestka -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#dwudziestka">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <untitled-ontology-61:Name>gniazdo 20</untitled-ontology-61:Name>
+        <rdfs:label>20</rdfs:label>
+        <rdfs:label>dwudziestka</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#machine_acceptance -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#machine_acceptance"/>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#moldCavityDefect -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#moldCavityDefect">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cavity"/>
+        <untitled-ontology-61:isRelatedTo rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Mold_defect"/>
+        <untitled-ontology-61:Name>defekt gniazda formy</untitled-ontology-61:Name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#mold_assembling -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#mold_assembling">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Mold"/>
+        <untitled-ontology-61:Name>montowanie formy</untitled-ontology-61:Name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0001">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>10/14</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0002 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0002">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>14, 63</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>14-63</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>14/63</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0003 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0003">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>37, 38</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>base bracket</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>kangur</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0004 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0004">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>53</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0005 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0005">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>adapter</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0006 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0006">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>3000</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>cookbox</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>q</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0007 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0007">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>esw20</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0008 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0008">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>731/737</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0009 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0009">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>f500</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>krzyżak B</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0010 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0010">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>pjt</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0011 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0011">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>skoda</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0012 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p0012">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>szarnier</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p1200 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p1200">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>1200</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p1400 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#p1400">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Product"/>
+        <rdfs:isDefinedBy>1400</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#preheater_in_03 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#preheater_in_03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Preheater"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#03 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <untitled-ontology-61:IsEquippedWith rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#preheater_in_03"/>
+        <rdfs:isDefinedBy>trójka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#04 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#04">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:isDefinedBy>czwórka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#08 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#08">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:isDefinedBy>ósemka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#09 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#09">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <untitled-ontology-61:Name>gniazdo 09</untitled-ontology-61:Name>
+        <rdfs:isDefinedBy>dziewiątka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#10 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#10">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <untitled-ontology-61:Name>gniazdo 10</untitled-ontology-61:Name>
+        <rdfs:isDefinedBy>dziesiątka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#11 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#11">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:isDefinedBy>11</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>jedenastka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#12 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#12">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:isDefinedBy>12</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>dwunastka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#13 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#13">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:isDefinedBy>13</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>trzynastka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#15 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#15">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <untitled-ontology-61:Name>gniazdo 15</untitled-ontology-61:Name>
+        <rdfs:isDefinedBy>15</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>piętnastka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#16 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#16">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:isDefinedBy>16</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>szesnastka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#17 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#17">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:isDefinedBy>17</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>siedemnastka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#18 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#18">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:isDefinedBy>18</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>osiemnastka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#19 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#19">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:isDefinedBy>19</rdfs:isDefinedBy>
+        <rdfs:isDefinedBy>dziewiętnastka</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#91 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#91">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:isDefinedBy>640</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#92 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#92">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Cells"/>
+        <rdfs:isDefinedBy>1300</rdfs:isDefinedBy>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#meeting2023/11/22 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#meeting2023/11/22">
+        <rdf:type rdf:resource="http://www.semanticweb.org/amaciol/ontologies/2023/9/untitled-ontology-61#Meeting"/>
+        <untitled-ontology-61:MeetingsDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-11-22T00:00:00</untitled-ontology-61:MeetingsDate>
+        <untitled-ontology-61:MeetingsName>Narada 2023/11/22</untitled-ontology-61:MeetingsName>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
