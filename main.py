@@ -3,22 +3,27 @@
 
 # In[1]
 import pathlib
-from owlready2 import *
+
 import spacy
 import pathlib
 import networkx as nx
-from spacy.symbols import ORTH
-from spacy import displacy
-from spacy.tokens import Span
+import owlready2
+from owlready2 import Ontology, ThingClass, Thing, EntityClass, ObjectPropertyClass
+from spacy.tokens import Span, Doc
 from collections import ChainMap
 from datetime import datetime
+
+from typing import Generator, List, Mapping
+
+OntologyIndividualSuperclass = Thing
+OntologyClassSuperclass = EntityClass
+OntologyClass = ThingClass
+
 
 # In[2]
 def flatten_comprehension(list_of_lists):
     return [item for row in list_of_lists for item in row]
 
-def print_names(label, iterable):
-    print(label, [x.name for x in iterable])
 
 def add_to_dictionary(dictionary, key, value):
     if key in dictionary:
@@ -26,304 +31,438 @@ def add_to_dictionary(dictionary, key, value):
     else:
         dictionary[key] = [value]
 
-def remove_keys_from_dict(dictionary, keys_to_remove):
-    return {key: value for key, value in dictionary.items() if key not in keys_to_remove}
 
-def print_matrix(title, matrix):
-    print(title)
-    for row in matrix.keys():
-        print (row,":", matrix[row])
+def remove_keys_from_dict(dictionary, keys_to_remove):
+    return {
+        key: value for key, value in dictionary.items() if key not in keys_to_remove
+    }
+
 
 def find_item(dictionary, item):
     for key, value in dictionary.items():
         if item in value:
             return key
 
-# In[3]
-# Create a pipe that converts lemmas to lower case:
-from spacy.language import Language
-from functools import reduce
 
-@Language.component('lower_case_lemmas')
+# Create a pipe that converts lemmas to lower case:
+@spacy.language.Language.component("lower_case_lemmas")
 def lower_case_lemmas(doc):
-    for token in doc :
+    for token in doc:
         token.lemma_ = token.lemma_.lower()
     return doc
 
-@Language.component("custom_sentencizer")
+
+# Create a custom sentencizer that sets sentence boundaries at newline characters:
+@spacy.language.Language.component("custom_sentencizer")
 def custom_sentencizer(doc):
     for i, token in enumerate(doc[:-2]):
-        # Define sentence start if pipe + titlecase token
-        if token.text == "\n":
-            doc[i + 1].is_sent_start = True
-        else:
-            # Explicitly set sentence start to False otherwise, to tell
-            # the parser to leave those tokens alone
-            doc[i + 1].is_sent_start = False
+        doc[i + 1].is_sent_start = token.text == "\n"
     return doc
 
-nlp = spacy.load("pl_core_news_lg")
-nlp.remove_pipe('ner') # Removing unnecessary ner with basic categories
-nlp.add_pipe("custom_sentencizer", before="parser")
+
+def prepare_nlp(spacy_baseline: str, patterns) -> spacy.Language:
+    nlp = spacy.load(spacy_baseline)
+    nlp.remove_pipe("ner")  # Removing unnecessary ner with basic categories
+    nlp.add_pipe("custom_sentencizer", before="parser")
+    nlp.add_pipe("lower_case_lemmas", after="tagger")
+    ruler = nlp.add_pipe(
+        "entity_ruler", config={"overwrite_ents": True, "validate": False}
+    )
+    ruler.add_patterns(patterns)
+    return nlp
 
 
-filename = "sample.rdf"
-onto = get_ontology(filename).load()
-from_individuals = [dict([(label, ind) for label in ind.isDefinedBy]) for ind in onto.individuals()]
-from_classes = [dict([(label, ind) for label in ind.isDefinedBy]) for ind in onto.classes()]
-flattened_list = ChainMap(*(from_individuals + from_classes))
-
-patterns = []
-for [pattern, item] in flattened_list.items():
-    patters_splitted = pattern.split()
-    # print (patters_splitted)
-    # key = "LEMMA"
-    # pat_dict = []
-    # for p_item in patters_splitted:
-    #      pat_dict.append({key: p_item})
-    #      key = "LOWER"
-    pat_dict = [{"LEMMA": p_item} for p_item in patters_splitted]
-    print (pat_dict)
-    patterns.append({"label" : item.name, "pattern": pat_dict })
-
-print(*patterns,sep='\n')
+# Ontology functions:
+def load_ontology(filename: pathlib.Path) -> Ontology:
+    return owlready2.get_ontology(filename).load()
 
 
-# In[8]:
+def get_labeled_items(
+    collection: Generator,
+) -> List[dict[str, OntologyIndividualSuperclass | OntologyClass]]:
+    return [dict([(label, ind) for label in ind.isDefinedBy]) for ind in collection]
 
 
-nlp.add_pipe("lower_case_lemmas", after="tagger")
-ruler = nlp.add_pipe("entity_ruler", config={"overwrite_ents": True, "validate": False})
-ruler.add_patterns(patterns)
+def get_labels_from_ontology(onto: Ontology) -> ChainMap:
+    labels_from_individuals = get_labeled_items(onto.individuals())
+    labels_from_classes = get_labeled_items(onto.classes())
+    return ChainMap(*(labels_from_individuals + labels_from_classes))
 
 
-# In[15]:
+def patterns_from_ontology(flattened_list: ChainMap):
+    patterns = []
+    for [pattern, item] in flattened_list.items():
+        patters_splitted = pattern.split()
+        pat_dict = [{"LEMMA": p_item} for p_item in patters_splitted]
+        patterns.append({"label": item.name, "pattern": pat_dict})
+    return patterns
 
-file_name = "sample.txt"
 
-doc = nlp(pathlib.Path(file_name).read_text(encoding="utf-8"))
+#########################################################################
+def prepare_document(language: spacy.Language, file_path: pathlib.Path) -> Doc:
+    return language(pathlib.Path(file_path).read_text(encoding="utf-8"))
 
-stop_individuals = [x for x in onto.individuals() if x.__class__.name == 'Cells']
-print_names("Stop individuals: ", stop_individuals)
-product_individuals = [x for x in onto.individuals() if x.__class__.name == 'Product']
-print_names("Product individuals: ", product_individuals)
-product_names = [x.name for x in product_individuals]
-print ('product_names', product_names)
-product_individuals = [x for x in onto.individuals() if x.__class__.name == 'Product']
 
-# defects_individuals = [x for x in onto.individuals() if x.__class__.name == 'Disqualifying_defect']
-# print_names("Disqualifying defects: ", defects_individuals)
-# defects_names = [x.name for x in defects_individuals]
-# print ('defects_names', defects_names)
-# defect_individuals = [x for x in onto.individuals() if x.__class__.name == 'Disqualifying_defect']
+def get_individuals_of_class(
+    ontoClass: OntologyClass,
+) -> List[OntologyIndividualSuperclass]:
+    return [x for x in onto.individuals() if x.__class__ == ontoClass]
 
-labeled_classes = [x for x in onto.classes() if len(x.isDefinedBy) > 0]
-labeled_individuals = [x for x in onto.individuals() if len(x.isDefinedBy) > 0]
-print_names('labeled_classes', labeled_classes)
-print_names('labeled_individuals', labeled_individuals)
 
-Occurance = [x for x in onto.classes() if x.name == 'Occurrance'][0]
-problems = [x for x in Occurance.descendants()]
-print_names('Problems', problems)
+def get_product_names(product_individuals) -> List[str]:
+    return [x.name for x in product_individuals]
 
-Device = [x for x in onto.classes() if x.name == 'Device'][0]
-devices = [x for x in Device.descendants()]
 
-# In[16]
-dict_all_items = dict(list(flattened_list.items()))
-print('dict_all_items', dict_all_items)
-stop_ents = [ent for ent in doc.ents if dict_all_items[ent.lemma_] in stop_individuals]
+def get_class_named(onto: Ontology, name: str) -> OntologyClass:
+    return [x for x in onto.classes() if x.name == name][0]
 
-filtered_stop_ents = [stop_ents[0]]
-for se in stop_ents[1::]:
-    if (dict_all_items[se.lemma_] != dict_all_items[filtered_stop_ents[-1].lemma_]):
-        filtered_stop_ents.append(se)
 
-paired_stop_ents = [(filtered_stop_ents[i], filtered_stop_ents[i+1] if i < len(filtered_stop_ents)-1 else None) for i in range(len(filtered_stop_ents))]
+def get_class_descendants(root: OntologyClass) -> List[OntologyClass]:
+    return [x for x in root.descendants()]
 
-cases = {}
-Concern = [x for x in onto.classes() if x.name == 'Concern'][0]
-Case = [x for x in onto.classes() if x.name == 'Case'][0]
-is_discussed = [x for x in onto.object_properties() if x.name == 'isDiscussed'][0]
 
-for case_token in paired_stop_ents:
-    current_cell = case_token[0]
-    current_item = dict_all_items[current_cell.lemma_]
-    case_start = doc[current_cell.sent.start]
-    case_end = doc[case_token[1].sent.start] if case_token[1] != None else doc[-1]
-    cases[case_token[0]] = Span(doc, case_start.i, case_end.i)    
+def get_obj_propertied(onto: Ontology, name: str) -> ObjectPropertyClass:
+    return [x for x in onto.object_properties() if x.name == name][0]
 
-print('discussed cells', cases.keys())
 
-# In[18]
-problems_by_name = {item.name:item for item in problems}
-devices_by_name = {item.name:item for item in devices}
+def all_stop_ents(
+    entities: tuple[Span],
+    dict_all_items: Mapping[str, EntityClass | Thing],
+    stop_individuals: List[Thing],
+) -> List[Span]:
+    return [ent for ent in entities if dict_all_items[ent.lemma_] in stop_individuals]
 
-Meeting = [x for x in onto.classes() if x.name == 'Meeting'][0]
-meeting_individual = Meeting("meeting_" + datetime.now().strftime("%m_%d_%Y"))
 
-for case in cases:    
-    case_item = Case()    
-    cell_name = case
-    for x in onto.individuals():
-        if cell_name.lemma_ in x.isDefinedBy:
-            current_cell_ind = x
-    current_cell_ind.isDiscussed.append(case_item)
-    case_item.refersTo.append(current_cell_ind)
-    case_item.isDiscussedDuring.append(meeting_individual)
-    print('\nCASE LEMMA',case.lemma_, list(current_cell_ind.IsEquippedWith))
-    all_devices_classes = set(flatten_comprehension([x.is_a for x in list(current_cell_ind.IsEquippedWith)]))
-    print('all_devices_classes', all_devices_classes)
+def get_stop_ents(
+    entities: tuple[Span],
+    dict_all_items: Mapping[str, EntityClass | Thing],
+    stop_individuals: List[Thing],
+) -> List[Span]:
+    stop_ents = all_stop_ents(entities, dict_all_items, stop_individuals)
+    filtered_stop_ents = [stop_ents[0]]
+    for se in stop_ents[1::]:
+        if dict_all_items[se.lemma_] != dict_all_items[filtered_stop_ents[-1].lemma_]:
+            filtered_stop_ents.append(se)
+    return filtered_stop_ents
+
+
+def pair_stop_entities(filtered_stop_ents: List[Span]) -> List[tuple[Span, Span]]:
+    paired_stop_ents = [
+        (
+            filtered_stop_ents[i],
+            filtered_stop_ents[i + 1] if i < len(filtered_stop_ents) - 1 else None,
+        )
+        for i in range(len(filtered_stop_ents))
+    ]
+    return paired_stop_ents
+
+
+def get_cases(doc: Doc, paired_stop_ents: List[tuple[Span, Span]]) -> dict[Span, Span]:
+    doc_split_for_cases = {}
+    for case_token in paired_stop_ents:
+        current_cell_label, next_cell_label = case_token
+        case_text_start = doc[current_cell_label.sent.start]
+        case_text_end = (
+            doc[next_cell_label.sent.start] if next_cell_label != None else doc[-1]
+        )
+        doc_split_for_cases[current_cell_label] = Span(
+            doc, case_text_start.i, case_text_end.i
+        )
+    return doc_split_for_cases
+
+
+def extract_ontology_items(
+    case_text: Span, onto: Ontology, case_item: OntologyClass
+) -> tuple[
+    dict[str, Span],
+    dict[OntologyClass, list[OntologyClass]],
+    dict[OntologyClass, list[Span]],
+    dict[OntologyClass, list[Span]],
+]:
+    devices = get_class_descendants(onto.Device)
+    devices_by_name = {item.name: item for item in devices}
+    product_names = get_product_names(get_individuals_of_class(onto.Product))
+    problems = get_class_descendants(onto.Occurrance)
 
     problems_in_case = {}
     mentioned_devices_classes = {}
     products_in_case = {}
     products_in_case_labels = {}
-    defects_in_case = {}
-    for tok in cases[case].ents:
-        if (tok.label_ in [x.name for x in problems]):
-            add_to_dictionary(problems_in_case, tok.label_, tok)                
-        if (tok.label_ in [x.name for x in devices]):
-            add_to_dictionary(mentioned_devices_classes,devices_by_name[tok.label_], tok)
-        if (tok.label_ in product_names):
-            product = [x for x in onto.individuals() if x.name == tok.label_]
-            add_to_dictionary(products_in_case, product[0], case_item)                
-            add_to_dictionary(products_in_case_labels,product[0], tok)
-
-    print('PROBLEMS', problems_in_case)
-    print('DEVICES', mentioned_devices_classes)
-    print('PRDUCTS_LABELS', products_in_case_labels)
-
-    for prod in products_in_case:
-        prod.isDiscussed.append(products_in_case[prod][0])
-    #     concern_item = Concern()
-    #     concern_item.isDiscussed.append(products_in_case[prod][0])
-    #     print('AAAAAAAAAAA', prod)
-    #     concern_item.isProduct.append(prod)    
-        print('For cell ', case, 'discussed product: ', prod.isDiscussed)
-        print('Full text: ', cases[case], '\n')
+    for token in case_text.ents:
+        if token.label_ in [x.name for x in problems]:
+            add_to_dictionary(problems_in_case, token.label_, token)
+        if token.label_ in [x.name for x in devices]:
+            add_to_dictionary(
+                mentioned_devices_classes, devices_by_name[token.label_], token
+            )
+        if token.label_ in product_names:
+            product = [x for x in onto.individuals() if x.name == token.label_]
+            add_to_dictionary(products_in_case, product[0], case_item)
+            add_to_dictionary(products_in_case_labels, product[0], token)
+    return (
+        problems_in_case,
+        mentioned_devices_classes,
+        products_in_case,
+        products_in_case_labels,
+    )
 
 
+def get_individuals_by_class(mentioned_devices_classes, all_devices_classes):
     individuals_by_class = {}
     for device_class in mentioned_devices_classes.keys():
         if device_class not in all_devices_classes:
             device_individual = device_class()
-            current_cell_ind.IsEquippedWith.append(device_individual)
-            device_individual.IsEquipmentIn = current_cell_ind
-            print('adding ', device_individual)
-        else:            
-            device_individual = next(dev_ind for dev_ind in current_cell_ind.IsEquippedWith if device_class in dev_ind.is_a)
-            print('using ', device_individual)
+            current_cell_individual.IsEquippedWith.append(device_individual)
+            device_individual.IsEquipmentIn = current_cell_individual
+            print("adding ", device_individual)
+        else:
+            device_individual = next(
+                dev_ind
+                for dev_ind in current_cell_individual.IsEquippedWith
+                if device_class in dev_ind.is_a
+            )
+            print("using ", device_individual)
         individuals_by_class[device_class] = device_individual
-    print('INDIVIDUALS_BY_CLASS', individuals_by_class)
+    print("INDIVIDUALS_BY_CLASS", individuals_by_class)
+    return individuals_by_class
 
-    all_parents = set()    
+
+def get_all_parents(mentioned_devices_classes):
+    all_parents = set()
     for dev_class in mentioned_devices_classes.keys():
         tmp = dev_class.ancestors()
         tmp.remove(dev_class)
         all_parents.update(tmp)
-    
-    leaf_devices = remove_keys_from_dict(mentioned_devices_classes, all_parents)
-    print('LEAF DEVICES', leaf_devices)
+    return all_parents
 
-    breakdowns = problems_in_case['Breakdown'] if 'Breakdown' in problems_in_case.keys() else []
-    print('BREAKDOWNS', breakdowns)
-    defects = problems_in_case['Disqualifying_defect'] if 'Disqualifying_defect' in problems_in_case.keys() else []
-    print('DEFECTS', defects)
 
+#######################################################################################
+def make_graph(cases, case):
     edges = []
     for token in cases[case]:
         for child in token.children:
-            edges.append(('{0}-{1}'.format(token.lower_,token.i),'{0}-{1}'.format(child.lower_,child.i)))
-    graph = nx.Graph(edges)
-    
+            edges.append(
+                (
+                    "{0}-{1}".format(token.lower_, token.i),
+                    "{0}-{1}".format(child.lower_, child.i),
+                )
+            )
+    return nx.Graph(edges)
+
+
+def make_distance_matrix(leaf_devices, graph, breakdowns):
     matrix = {}
     for l in leaf_devices.values():
         for s_d in l:
             matrix[s_d] = {}
             for s_b in breakdowns:
-                s_d_name = '{0}-{1}'.format(s_d[0].lower_,s_d[0].i)
-                s_b_name = '{0}-{1}'.format(s_b[0].lower_,s_b[0].i)
+                s_d_name = "{0}-{1}".format(s_d[0].lower_, s_d[0].i)
+                s_b_name = "{0}-{1}".format(s_b[0].lower_, s_b[0].i)
 
                 local_dist = 100
                 try:
-                    local_dist = nx.shortest_path_length(graph, source=s_d_name, target=s_b_name)
+                    local_dist = nx.shortest_path_length(
+                        graph, source=s_d_name, target=s_b_name
+                    )
                 except:
                     local_dist = 100 + abs(s_d[0].i - s_b[0].i)
                 matrix[s_d][s_b] = abs(local_dist)
-    
-    dev_min = ""
-    bre_min = ""
-    dist = 0    
-    if(len(matrix.keys()) > 0) and (len(matrix[next(iter(matrix))].keys()) > 0):
-        while dist < 1000:     
-            dist = 1000
-            for s_d in matrix.keys():
-                for s_b in matrix[s_d].keys():
-                    if matrix[s_d][s_b] < dist:
-                        dist = matrix[s_d][s_b]                    
-                        dev_min = s_d
-                        bre_min = s_b
-            for s_d_internal in matrix[dev_min]:
-                matrix[dev_min][s_d_internal] = 1000
-            for s_d_other in matrix.keys():
-                if (str(s_d_other) == str(dev_min)):
-                    for s_d_internal in matrix[dev_min]:
-                        matrix[s_d_other][s_d_internal] = 1000
-            for s_b_internal in matrix:
-                 matrix[s_b_internal][bre_min] = 1000
-            if dist < 1000:
-                item_found = find_item(leaf_devices, dev_min)
-                problem = problems_by_name[bre_min.ents[0].label_]()
-                problem.isDiscussed.append(case_item)
-                problem.occuredFor.append(individuals_by_class[item_found])
-                print('occurance added ', problem, 'happend to', individuals_by_class[item_found])
+    return matrix
 
+
+# same as above?
+def make_distance_matrix_defects(products_in_case_labels, graph, defects):
     matrix = {}
     for l in products_in_case_labels.values():
         for s_d in l:
             matrix[s_d] = {}
             for s_b in defects:
-                s_d_name = '{0}-{1}'.format(s_d[0].lower_,s_d[0].i)
-                s_b_name = '{0}-{1}'.format(s_b[0].lower_,s_b[0].i)
+                s_d_name = "{0}-{1}".format(s_d[0].lower_, s_d[0].i)
+                s_b_name = "{0}-{1}".format(s_b[0].lower_, s_b[0].i)
 
                 local_dist = 100
                 try:
-                    local_dist = nx.shortest_path_length(graph, source=s_d_name, target=s_b_name)
+                    local_dist = nx.shortest_path_length(
+                        graph, source=s_d_name, target=s_b_name
+                    )
                 except:
                     local_dist = 100 + abs(s_d[0].i - s_b[0].i)
                 matrix[s_d][s_b] = abs(local_dist)
-    
+    return matrix
+
+
+def add_pboblems_to_devices(
+    matrix, leaf_devices, case_item, individuals_by_class, problems_by_name
+):
     dev_min = ""
     bre_min = ""
-    dist = 0    
-    if(len(matrix.keys()) > 0) and (len(matrix[next(iter(matrix))].keys()) > 0):
-        while dist < 1000:     
+    dist = 0
+    if (len(matrix.keys()) > 0) and (len(matrix[next(iter(matrix))].keys()) > 0):
+        while dist < 1000:
             dist = 1000
             for s_d in matrix.keys():
                 for s_b in matrix[s_d].keys():
                     if matrix[s_d][s_b] < dist:
-                        dist = matrix[s_d][s_b]                    
+                        dist = matrix[s_d][s_b]
                         dev_min = s_d
                         bre_min = s_b
             for s_d_internal in matrix[dev_min]:
                 matrix[dev_min][s_d_internal] = 1000
             for s_d_other in matrix.keys():
-                if (str(s_d_other) == str(dev_min)):
+                if str(s_d_other) == str(dev_min):
                     for s_d_internal in matrix[dev_min]:
                         matrix[s_d_other][s_d_internal] = 1000
             for s_b_internal in matrix:
-                 matrix[s_b_internal][bre_min] = 1000
+                matrix[s_b_internal][bre_min] = 1000
+            if dist < 1000:
+                item_found = find_item(leaf_devices, dev_min)
+                problem = problems_by_name[bre_min.ents[0].label_]()
+                problem.isDiscussed.append(case_item)
+                problem.occuredFor.append(individuals_by_class[item_found])
+                print(
+                    "occurance added ",
+                    problem,
+                    "happend to",
+                    individuals_by_class[item_found],
+                )
+
+
+def add_pboblems_to_devices_another(
+    matrix, products_in_case_labels, case_item, problems_by_name
+):
+    dev_min = ""
+    bre_min = ""
+    dist = 0
+    if (len(matrix.keys()) > 0) and (len(matrix[next(iter(matrix))].keys()) > 0):
+        while dist < 1000:
+            dist = 1000
+            for s_d in matrix.keys():
+                for s_b in matrix[s_d].keys():
+                    if matrix[s_d][s_b] < dist:
+                        dist = matrix[s_d][s_b]
+                        dev_min = s_d
+                        bre_min = s_b
+            for s_d_internal in matrix[dev_min]:
+                matrix[dev_min][s_d_internal] = 1000
+            for s_d_other in matrix.keys():
+                if str(s_d_other) == str(dev_min):
+                    for s_d_internal in matrix[dev_min]:
+                        matrix[s_d_other][s_d_internal] = 1000
+            for s_b_internal in matrix:
+                matrix[s_b_internal][bre_min] = 1000
             if dist < 1000:
                 item_found = find_item(products_in_case_labels, dev_min)
                 problem = problems_by_name[bre_min.ents[0].label_]()
-                problem.isDiscussed.append(case_item)                
-                print('PROBLEM ', problem, ' DEFECT ', products_in_case_labels[item_found], ' ITEM ', item_found)
+                problem.isDiscussed.append(case_item)
+                print(
+                    "PROBLEM ",
+                    problem,
+                    " DEFECT ",
+                    products_in_case_labels[item_found],
+                    " ITEM ",
+                    item_found,
+                )
                 problem.occuredFor.append(item_found)
                 # print('PROBLEM !!!!!!!!!!!!!!!!!!!!!', problem, item_found)
 
 
+def get_cell_individual_by_cellname(onto: Ontology, cell_name: Span):
+    # print("cell_name", cell_name)
+    for x in onto.individuals():
+        if cell_name.lemma_ in x.isDefinedBy:
+            return x
+    return None
+
+
+def get_devices_in_cell(
+    current_cell_individual: OntologyIndividualSuperclass,
+) -> set[OntologyClass]:
+    return set(
+        flatten_comprehension(
+            [x.is_a for x in list(current_cell_individual.IsEquippedWith)]
+        )
+    )
+
+
+def get_leaf_devices(mentioned_devices_classes):
+    """'Leaf device' is a device mentioned in the cese text, that is not a parent of any other device mentioned in the case text."""
+    all_parents = get_all_parents(mentioned_devices_classes)
+    return remove_keys_from_dict(mentioned_devices_classes, all_parents)
+
+
+#######################################################################################
+
+
+onto = load_ontology("sample.rdf")
+labels = get_labels_from_ontology(onto)
+patterns = patterns_from_ontology(labels)
+nlp = prepare_nlp("pl_core_news_lg", patterns)
+doc = prepare_document(nlp, "sample.txt")
+
+dict_all_items = dict(list(labels.items()))
+stop_individuals = get_individuals_of_class(onto.Cells)
+stop_ents = get_stop_ents(doc.ents, dict_all_items, stop_individuals)
+paired_stop_ents = pair_stop_entities(stop_ents)
+doc_split_for_cases = get_cases(doc, paired_stop_ents)
+problems = get_class_descendants(onto.Occurrance)
+Meeting = get_class_named(onto, "Meeting")
+meeting_individual = Meeting("meeting_" + datetime.now().strftime("%m_%d_%Y"))
+problems_by_name = {item.name: item for item in problems}
+
+for case_cell_name in doc_split_for_cases:
+    # Assuming that case name is a single token
+    assert len(case_cell_name) == 1
+    new_case_individual = onto.Case()
+    current_cell_individual = get_cell_individual_by_cellname(onto, case_cell_name)
+    current_cell_individual.isDiscussed.append(new_case_individual)
+    new_case_individual.refersTo.append(current_cell_individual)
+    new_case_individual.isDiscussedDuring.append(meeting_individual)
+
+    all_cell_devices_classes = get_devices_in_cell(current_cell_individual)
+    (
+        problems_in_case,
+        mentioned_devices_classes,
+        products_in_case,
+        products_in_case_labels,
+    ) = extract_ontology_items(
+        doc_split_for_cases[case_cell_name],
+        onto,
+        new_case_individual,
+    )
+
+    for product in products_in_case:
+        product.isDiscussed.append(products_in_case[product][0])
+
+    
+    individuals_by_class = get_individuals_by_class(
+        mentioned_devices_classes, all_cell_devices_classes
+    )
+    leaf_devices = get_leaf_devices(mentioned_devices_classes)
+    breakdowns = (
+        problems_in_case["Breakdown"] if "Breakdown" in problems_in_case.keys() else []
+    )
+    graph = make_graph(doc_split_for_cases, case_cell_name)
+    matrix = make_distance_matrix(leaf_devices, graph, breakdowns)
+    add_pboblems_to_devices(
+        matrix,
+        leaf_devices,
+        new_case_individual,
+        individuals_by_class,
+        problems_by_name,
+    )
+
+    defects = (
+        problems_in_case["Disqualifying_defect"]
+        if "Disqualifying_defect" in problems_in_case.keys()
+        else []
+    )
+    matrix = make_distance_matrix_defects(products_in_case_labels, graph, defects)
+    add_pboblems_to_devices_another(
+        matrix, products_in_case_labels, new_case_individual, problems_by_name
+    )
+
+
 filenameUpdate = "result.rdf"
-onto.save(filenameUpdate)        
+onto.save(filenameUpdate)
 
 # %%
